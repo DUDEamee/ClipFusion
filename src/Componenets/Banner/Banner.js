@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {API_KEY ,imageUrl} from '../../Constants/constants'
+import {API_KEY ,imageUrl} from '../../constants/constants'
 import axios from '../../axios'
 import "./Banner.css"
 const Banner = () => {
