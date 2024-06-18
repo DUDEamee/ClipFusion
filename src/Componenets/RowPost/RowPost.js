@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react'
-import { imageUrl} from '../../constants/constants'
+import { API_KEY, imageUrl} from '../../constants/constants'
 import "./RowPost.css"
 import Youtube from 'react-youtube'
 import axios from '../../axios'
@@ -27,8 +27,12 @@ const RowPost = (props) => {
 
   const handleMovie = (id)=>{
     console.log(id)
-    axios.get('movie/573435/videos?api_key=4be4ab59f8118b0cf8dd75efe8381b78&language=en-US').then(response=>{
-      console.log(response.data)
+    axios.get(`movie/${id}/videos?api_key=${API_KEY}&language=en-US`).then(response=>{
+      if(response.data.results.length!==0){
+        setId(response.data.results[0])
+      }else{
+        console.log('Trailer is emty')
+      }
     })
   }
   return (
@@ -42,8 +46,8 @@ const RowPost = (props) => {
         )}
 
       </div>
-        <Youtube opts={opts} videoId="2g811Eo7K8U" />
-    </div>
+{   urlId &&  <Youtube opts={opts} videoId={urlId.key} /> 
+}    </div>
   )
 }
 
